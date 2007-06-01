@@ -1,5 +1,8 @@
 Revision history for Perl extension File::Touch.
 
+0.02  Thu Jun  1 08:48:56 2007
+	- fixed bareword filehandle (thanks Tolga Ceylan)
+	- I changed my name
 0.01  Thu Jul  5 09:35:24 2001
 	- original version; created by Nigel Wetters
 

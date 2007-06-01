@@ -3,8 +3,8 @@ package File::Touch;
 require Exporter;
 @ISA = qw(Exporter);
 @EXPORT = qw(touch);
-$VERSION = "0.01";
-
+$VERSION = "0.02";
+use warnings;
 use strict;
 
 use Carp;
@@ -89,8 +89,8 @@ sub touch
 	    $mtime = $sb->mtime;
 	} else {
 	    unless ($self->{_no_create}){
-		sysopen(FH,$file,O_WRONLY|O_CREAT|O_NONBLOCK|O_NOCTTY) or croak("Can't create $file : $!");
-		close FH or croak("Can't close $file : $!");
+		sysopen my $fh,$file,O_WRONLY|O_CREAT|O_NONBLOCK|O_NOCTTY or croak("Can't create $file : $!");
+		close $fh or croak("Can't close $file : $!");
 		$atime = $time;
 		$mtime = $time;
 	    }
@@ -195,11 +195,11 @@ If defined, use this time (in epoch seconds) instead of current time for modific
 
 =head1 AUTHOR
 
-Nigel Wetters (nigel@wetters.net)
+Nigel Wetters Gourlay (nwetters@cpan.org)
 
 =head1 COPYRIGHT
 
-Copyright (c) 2001, Nigel Wetters. All Rights Reserved.
+Copyright (c) 2001,2007 Nigel Wetters Gourlay. All Rights Reserved.
 This module is free software. It may be used, redistributed
 and/or modified under the same terms as Perl itself.
 
