@@ -3,13 +3,39 @@ package File::Touch;
 require Exporter;
 @ISA = qw(Exporter);
 @EXPORT = qw(touch);
-$VERSION = "0.02";
+$VERSION = "0.06";
 use warnings;
 use strict;
 
 use Carp;
 use IO::File;
 use File::stat;
+use Fcntl;
+
+my $SYSOPEN_MODE = O_WRONLY|O_CREAT;
+eval {
+    $SYSOPEN_MODE |= &{ $Fcntl::{'O_NONBLOCK'} };
+};
+if($@) {
+    if($@ =~ /Your vendor has not defined/) {
+	# OK, we don't have O_NONBLOCK:
+	# probably running on Windows.
+    } else {
+	die "$@"; # Rethrow exception, must be something different
+    }
+}
+
+
+
+
+
+foreach my $Fcntl_sym (keys %Fcntl::){
+    if($Fcntl_sym eq 'O_NONBLOCK'){
+	$SYSOPEN_MODE |= &{ $Fcntl::{'O_NONBLOCK'} };
+	last;
+    }
+}
+
 
 sub new
 {
@@ -89,7 +115,7 @@ sub touch
 	    $mtime = $sb->mtime;
 	} else {
 	    unless ($self->{_no_create}){
-		sysopen my $fh,$file,O_WRONLY|O_CREAT|O_NONBLOCK|O_NOCTTY or croak("Can't create $file : $!");
+		sysopen my $fh,$file,$SYSOPEN_MODE or croak("Can't create $file : $!");
 		close $fh or croak("Can't close $file : $!");
 		$atime = $time;
 		$mtime = $time;
@@ -199,7 +225,7 @@ Nigel Wetters Gourlay (nwetters@cpan.org)
 
 =head1 COPYRIGHT
 
-Copyright (c) 2001,2007 Nigel Wetters Gourlay. All Rights Reserved.
+Copyright (c) 2001,2007,2009 Nigel Wetters Gourlay. All Rights Reserved.
 This module is free software. It may be used, redistributed
 and/or modified under the same terms as Perl itself.
 

@@ -1,5 +1,9 @@
 Revision history for Perl extension File::Touch.
 
+0.06  Tue Mar 24 11:22:13 2009
+        - now works on systems lacking O_NONBLOCK
+	  (thanks Ronald Fischer)
+	- BUG: no longer works adds O_NOCTTY with terminal devices
 0.02  Thu Jun  1 08:48:56 2007
 	- fixed bareword filehandle (thanks Tolga Ceylan)
 	- I changed my name
