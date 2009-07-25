@@ -1,5 +1,8 @@
 Revision history for Perl extension File::Touch.
 
+0.07  Sat Jul 25 12:54 2009
+        - BUGFIX last fix caused probs (thanks Reini Urban)
+          see https://rt.cpan.org/Ticket/Display.html?id=48183
 0.06  Tue Mar 24 11:22:13 2009
         - now works on systems lacking O_NONBLOCK
 	  (thanks Ronald Fischer)
