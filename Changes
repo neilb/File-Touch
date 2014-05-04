@@ -4,6 +4,7 @@ Revision history for Perl module File::Touch
     - Reformatted this file according to CPAN::Changes::Spec
     - Moved Touch.pm into lib/File/Touch.pm and created t/ with 01-require.t
     - Added a basic proper testsuite, that tests the core functionality
+    - Specified min perl version 5.6.0
     - Switched to Dist::Zilla
     - Got rid of tab characters
 
