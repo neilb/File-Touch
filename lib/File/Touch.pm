@@ -1,11 +1,11 @@
 package File::Touch;
 
-require Exporter;
-@ISA = qw(Exporter);
-@EXPORT = qw(touch);
-$VERSION = "0.08";
 use warnings;
 use strict;
+
+require Exporter;
+our @ISA = qw(Exporter);
+our @EXPORT = qw(touch);
 
 use Carp;
 use IO::File;
