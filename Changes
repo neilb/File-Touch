@@ -1,15 +1,22 @@
-Revision history for Perl extension File::Touch.
+Revision history for Perl module File::Touch
 
-0.07  Sat Jul 25 12:54 2009
-        - BUGFIX last fix caused probs (thanks Reini Urban)
-          see https://rt.cpan.org/Ticket/Display.html?id=48183
-0.06  Tue Mar 24 11:22:13 2009
-        - now works on systems lacking O_NONBLOCK
-	  (thanks Ronald Fischer)
-	- BUG: no longer works adds O_NOCTTY with terminal devices
-0.02  Thu Jun  1 08:48:56 2007
-	- fixed bareword filehandle (thanks Tolga Ceylan)
-	- I changed my name
-0.01  Thu Jul  5 09:35:24 2001
+0.09 2014-05-05
+    - Reformatted this file according to CPAN::Changes::Spec
+
+0.08 2009-07-25
+
+0.07 2009-07-25
+    - BUGFIX last fix caused probs (thanks Reini Urban)
+      see https://rt.cpan.org/Ticket/Display.html?id=48183
+
+0.06 2009-03-24
+    - now works on systems lacking O_NONBLOCK (thanks Ronald Fischer)
+    - BUG: no longer works adds O_NOCTTY with terminal devices
+
+0.02 2007-06-01
+    - fixed bareword filehandle (thanks Tolga Ceylan)
+    - I changed my name
+
+0.01 2001-07-05
 	- original version; created by Nigel Wetters
 
