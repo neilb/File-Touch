@@ -4,6 +4,7 @@ Revision history for Perl module File::Touch
     - Reformatted this file according to CPAN::Changes::Spec
     - Moved Touch.pm into lib/File/Touch.pm and created t/ with 01-require.t
     - Switched to Dist::Zilla
+    - Got rid of tab characters
 
 0.08 2009-07-25
     - Don't die if trying to use O_NONBLOCK fails.

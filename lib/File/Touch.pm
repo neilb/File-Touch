@@ -44,28 +44,30 @@ sub new
     my $mtime       = $arg{mtime};           # If defined, use this time for modification time instead of current time.
 
     if ($atime_only && $mtime_only){
-	croak("Incorrect usage: 'atime_only' and 'mtime_only' are both set - they are mutually exclusive.");
+        croak("Incorrect usage: 'atime_only' and 'mtime_only' are both set - they are mutually exclusive.");
     }
 
-    if (defined $time){
-	if ((defined $atime) || (defined $mtime)){
-	    croak("Incorrect usage: 'time' should not be used with either 'atime' or 'mtime' - ambiguous.");
-	}
-	$atime = $time unless $mtime_only;
-	$mtime = $time unless $atime_only;
+    if (defined $time) {
+        if ((defined $atime) || (defined $mtime)) {
+            croak("Incorrect usage: 'time' should not be used with either ",
+                  "'atime' or 'mtime' - ambiguous.");
+        }
+        $atime = $time unless $mtime_only;
+        $mtime = $time unless $atime_only;
     }
 
-    if (defined $reference){
-	if ((defined $time) || (defined $atime) || (defined $mtime)){
-	    croak("Incorrect usage: 'reference' should not be used with 'time', 'atime' or 'mtime' - ambiguous.");
-	}
-	if (-e $reference){
-	    my $sb = stat($reference) or croak("Could not stat ($reference): $!");
-	    $atime = $sb->atime unless $mtime_only;
-	    $mtime = $sb->mtime unless $atime_only;
-	} else {
-	    croak("Reference file ($reference) does not exist");
-	}
+    if (defined $reference) {
+        if ((defined $time) || (defined $atime) || (defined $mtime)) {
+            croak("Incorrect usage: 'reference' should not be used with 'time', 'atime' or 'mtime' - ambiguous.");
+        }
+        if (-e $reference) {
+            my $sb = stat($reference) or croak("Could not stat ($reference): $!");
+            $atime = $sb->atime unless $mtime_only;
+            $mtime = $sb->mtime unless $atime_only;
+        }
+        else {
+            croak("Reference file ($reference) does not exist");
+        }
     }
 
     $self->{_atime}      = $atime;
@@ -84,48 +86,51 @@ sub touch
     my $self;
 
     if ($caller_is_obj){
-	$self = $caller;
-    } else {
-	unshift @files, $caller;
-	$self->{_atime}      = undef;
-	$self->{_mtime}      = undef;
-	$self->{_no_create}  = 0;
-	$self->{_atime_only} = 0;
-	$self->{_mtime_only} = 0;
+        $self = $caller;
+    }
+    else {
+        unshift @files, $caller;
+        $self->{_atime}      = undef;
+        $self->{_mtime}      = undef;
+        $self->{_no_create}  = 0;
+        $self->{_atime_only} = 0;
+        $self->{_mtime_only} = 0;
     }
 
     my $count = 0;
 
-    foreach my $file (@files){
-	my $time = time();
-	my ($atime,$mtime);
-	
-	if (-e $file){
-	    my $sb = stat($file) or croak("Could not stat ($file): $!");
-	    $atime = $sb->atime;
-	    $mtime = $sb->mtime;
-	} else {
-	    unless ($self->{_no_create}){
-		sysopen my $fh,$file,$SYSOPEN_MODE or croak("Can't create $file : $!");
-		close $fh or croak("Can't close $file : $!");
-		$atime = $time;
-		$mtime = $time;
-	    }
-	}
-	unless ($self->{_mtime_only}){
-	    $atime = $time;
-	    $atime = $self->{_atime} if (defined $self->{_atime});
-	}
-	unless ($self->{_atime_only}){
-	    $mtime = $time;
-	    $mtime = $self->{_mtime} if (defined $self->{_mtime});
-	}
-	if (utime($atime,$mtime,$file)){
-	    $count++;
-	}
+    foreach my $file (@files) {
+        my $time = time();
+        my ($atime,$mtime);
+        
+        if (-e $file) {
+            my $sb = stat($file) or croak("Could not stat ($file): $!");
+            $atime = $sb->atime;
+            $mtime = $sb->mtime;
+        }
+        else {
+            unless ($self->{_no_create}) {
+                sysopen my $fh,$file,$SYSOPEN_MODE or croak("Can't create $file : $!");
+                close $fh or croak("Can't close $file : $!");
+                $atime = $time;
+                $mtime = $time;
+            }
+        }
+        unless ($self->{_mtime_only}) {
+            $atime = $time;
+            $atime = $self->{_atime} if (defined $self->{_atime});
+        }
+        unless ($self->{_atime_only}) {
+            $mtime = $time;
+            $mtime = $self->{_mtime} if (defined $self->{_mtime});
+        }
+        if (utime($atime,$mtime,$file)) {
+            $count++;
+        }
     }
     return $count;
 }
+
 1;
 
 __END__
@@ -143,11 +148,11 @@ File::Touch - update access and modification timestamps, creating nonexistent fi
  use File::Touch;
  $reference_file = '/etc/passwd';
  $touch_obj = File::Touch->new(
-			       reference => $reference_file,
-			       no_create => 1
-			       );
+                  reference => $reference_file,
+                  no_create => 1
+              );
  @file_list = ('one.txt','../two.doc');
- $count = $touch_obj->touch(@file_list);
+ $count     = $touch_obj->touch(@file_list);
 
 =head1 DESCRIPTION
 
