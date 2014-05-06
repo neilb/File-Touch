@@ -177,6 +177,12 @@ If nonzero, do not create new files. Default is zero.
 
 If defined, use timestamps from this file instead of current time. Default is undefined.
 
+=item time => $time
+
+If defined, then this value will be used for both access time and modification time,
+whichever of those are set. This time is overridden by the C<atime> and C<mtime> arguments,
+if you use them.
+
 =item atime => $time
 
 If defined, use this time (in epoch seconds) instead of current time for access time.
