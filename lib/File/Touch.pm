@@ -138,7 +138,7 @@ __END__
 
 =head1 NAME
 
-File::Touch - update access and modification timestamps, creating nonexistent files where necessary.
+File::Touch - update file access and modification times, optionally creating files if needed
 
 =head1 SYNOPSIS
 
