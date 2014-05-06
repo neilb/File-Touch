@@ -2,6 +2,9 @@ Revision history for Perl module File::Touch
 
 0.09 2014-05-07
     - Added documention for the "time => $time" argument. RT#63233
+    - Restructured dist with lib/ and t/ directories
+    - Added basic testsuite that tests core functionality
+    - Min perl version 5.6.0
 
 0.08_01 2014-05-04
     - Reformatted this file according to CPAN::Changes::Spec
