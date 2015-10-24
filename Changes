@@ -1,6 +1,8 @@
 Revision history for Perl module File::Touch
 
 0.10 2015-10-24 NEILB
+    - Added [MetaJSON] to dist.ini, so we get a META.json in the release
+    - Auto tag and push to github on release
     - Updated repo URL after changing my github username
 
 0.09 2014-05-07
