@@ -1,5 +1,8 @@
 Revision history for Perl module File::Touch
 
+0.10 2015-10-24 NEILB
+    - Updated repo URL after changing my github username
+
 0.09 2014-05-07
     - Added documention for the "time => $time" argument. RT#63233
     - Restructured dist with lib/ and t/ directories
