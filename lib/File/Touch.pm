@@ -224,6 +224,13 @@ If defined, use this time (in epoch seconds) instead of current time for modific
  my $count = $ref->touch(@files);
  print "$count files updated\n";
 
+=head2 Make a change to a file, keeping its timestamps unchanged
+
+ use File::Touch;
+ my $date_restorer = File::Touch->new(reference => $file);
+ # Update the contents of $file here.
+ $date_restorer->touch($file);
+
 =head1 REPOSITORY
 
 L<https://github.com/neilb/File-Touch>
