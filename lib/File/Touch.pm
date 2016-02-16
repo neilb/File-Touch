@@ -175,7 +175,9 @@ If nonzero, do not create new files. Default is zero.
 
 =item reference => $reference_file
 
-If defined, use timestamps from this file instead of current time. Default is undefined.
+If defined, use timestamps from this file instead of current time. The timestamps are read
+from the reference file when the object is created, not when C<<->touch>> is invoked.
+Default is undefined.
 
 =item time => $time
 
