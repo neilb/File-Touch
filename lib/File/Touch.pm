@@ -175,7 +175,9 @@ If nonzero, do not create new files. Default is zero.
 
 =item reference => $reference_file
 
-If defined, use timestamps from this file instead of current time. Default is undefined.
+If defined, use timestamps from this file instead of current time. The timestamps are read
+from the reference file when the object is created, not when C<<->touch>> is invoked.
+Default is undefined.
 
 =item time => $time
 
@@ -221,6 +223,13 @@ If defined, use this time (in epoch seconds) instead of current time for modific
  my $ref = File::Touch->new( mtime => $time, no_create => 1 );
  my $count = $ref->touch(@files);
  print "$count files updated\n";
+
+=head2 Make a change to a file, keeping its timestamps unchanged
+
+ use File::Touch;
+ my $date_restorer = File::Touch->new(reference => $file);
+ # Update the contents of $file here.
+ $date_restorer->touch($file);
 
 =head1 REPOSITORY
 
