@@ -6,5 +6,7 @@ perl:
 install:
     - cpanm --notest -q Sparrow
     - sparrow plg install file-touch-smoke  
+    - "(dzil authordeps --missing | grep -vP '[^\\w:]' | xargs -n 5 -P 10 cpanm --quiet --notest)"
+    - "(dzil listdeps  --author --missing | grep -vP '[^\\w:]' | cpanm --quiet --notest)"
 
-script: "cpanm . && sparrow plg run file-touch-smoke"
+script: "export PERL5LIB=$PWD/lib && sparrow plg run file-touch-smoke"
