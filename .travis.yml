@@ -1,0 +1,10 @@
+language: "perl"
+
+perl:
+  - "5.20"
+
+install:
+    - cpanm --notest -q Sparrow
+    - sparrow plg install file-touch-smoke  
+
+script: "cpanm . && sparrow plg run file-touch-smoke"
