@@ -1,5 +1,10 @@
 Revision history for Perl module File::Touch
 
+0.11_03 2021-03-18 NEILB
+    - Time::HiRes doesn't provide utime() on Windows, so now we try and
+      load Time::HiRes in a BEGIN block, and only enforce the min version
+      if it loaded ok.
+
 0.11_02 2021-03-18 NEILB
     - Looks like I should have specified a min version of
       Time::HiRes. Was getting some fails from CPAN Testers,

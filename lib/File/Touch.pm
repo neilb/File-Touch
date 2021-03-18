@@ -12,7 +12,16 @@ use Carp;
 use IO::File;
 use File::stat;
 use Fcntl;
-use Time::HiRes 1.9764 qw/ time utime /;
+
+BEGIN {
+    eval {
+        require Time::HiRes;
+        Time::HiRes->import(qw/ time utime /);
+    };
+    if (not $@) {
+        Time::HiRes->VERSION(1.9764);
+    }
+}
 
 my $SYSOPEN_MODE = O_WRONLY|O_CREAT;
 eval {
