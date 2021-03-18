@@ -1,5 +1,10 @@
 Revision history for Perl module File::Touch
 
+0.11_02 2021-03-18 NEILB
+    - Looks like I should have specified a min version of
+      Time::HiRes. Was getting some fails from CPAN Testers,
+      about utime() not being available.
+
 0.11_01 2021-03-17 NEILB
     - Try Slaven's suggested fix for RT#128243
 

@@ -12,7 +12,7 @@ use Carp;
 use IO::File;
 use File::stat;
 use Fcntl;
-use Time::HiRes qw/ time utime /;
+use Time::HiRes 1.9764 qw/ time utime /;
 
 my $SYSOPEN_MODE = O_WRONLY|O_CREAT;
 eval {
